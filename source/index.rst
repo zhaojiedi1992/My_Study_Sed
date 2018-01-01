@@ -19,8 +19,6 @@ awk学习_
 
 .. _awk学习: http://my-study-gawk.readthedocs.io/en/latest/
 
-sed学习
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
     :maxdepth: 2
@@ -34,16 +32,3 @@ sed学习
     sed学习/06-高级sed
     sed学习/07-一些样例脚本
 
-:doc:`sed学习//01-简介` 
-
-:doc:`sed学习//02-运行sed脚本` 
-
-:doc:`sed学习//03-sed脚本` 
-
-:doc:`sed学习//04-地址选择行` 
-
-:doc:`sed学习//05-正则表达式选择文本` 
-
-:doc:`sed学习//06-高级sed` 
-
-:doc:`sed学习//07-一些样例脚本` 
