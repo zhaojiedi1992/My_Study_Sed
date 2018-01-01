@@ -1,0 +1,97 @@
+04 地址选择行
+=====================================================
+
+4.1 通过数字选择行
+--------------------------------------------------------
+
+主要有一下几种。
+
+number
+    直接指定某行行号即可
+$       
+    代表末行
+first~step
+    指定开始行，和跳步行数
+
+样例：
+
+.. code-block:: bash
+
+    [root@centos74 ~]$ seq 3 | sed -n '2p'
+    2
+    [root@centos74 ~]$ seq 3 | sed -n '$p'
+    3
+    [root@centos74 ~]$ seq 3 | sed -n '1~2p'
+    1
+    3
+
+4.2 通过文本去选择行
+----------------------------------------------------------------
+
+/regexp/
+    只选择regexp这个正则表达式匹配的行，而不是默认的所有行
+
+ \%regexp%
+    这个是方便第一个的， 当第一个的正则中包含了大量/字符的时候。 可以考试使用这个，避免大量的转义符号。
+/regexp/I
+    不区分大小写匹配
+
+/regexp/M
+    使用多行模式下的， 默认sed是一行一行匹配的。跨行的是不会被匹配的。
+
+样例： 
+
+.. code-block:: bash
+
+    [root@centos74 ~]$ sed -n '/csh$/p' /etc/passwd
+    gentoo:x:1009:1009:gentoo distribution:/home/gentoo:/bin/csh
+    [root@centos74 ~]$ echo "/home/alice/documents/ .hellow world" |sed -n  '/^\/home\/alice\/documents\//p'
+    /home/alice/documents/ .hellow world
+    [root@centos74 ~]$ echo "/home/alice/documents/ .hellow world" |sed -n   '\%^/home/alice/documents/%p'
+    /home/alice/documents/ .hellow world
+
+上面的第二个和第三个功能是一样的。 明显第三个简洁了好多。
+
+4.3 范围地址
+----------------------------------------------------------------
+
+0,/regexp/
+    匹配0行到指定的正则表达式直接的行
+addr1,+N
+    匹配地址1后的N行
+addr1,~N
+    匹配地址1到N的下一个倍数行
+
+样例： 
+
+.. code-block:: bash
+
+    [root@centos74 ~]$ seq 10 | sed -n '1,/[0-9]/p'
+    1
+    2
+    [root@centos74 ~]$ seq 10 | sed -n '0,/[0-9]/p'
+    1
+    [root@centos74 ~]$ seq 10
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+
+    [root@centos74 ~]$ seq 10 | sed -n '6,+2p'
+    6
+    7
+    8
+
+    [root@centos74 ~]$ seq 10 | sed -n '6,~4p'
+    6
+    7
+    8
+
+
+

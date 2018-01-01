@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>07 一些样例脚本 &mdash; My_Study_Sed v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="My_Study_Sed v0.1 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> My_Study_Sed
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">07 一些样例脚本</a><ul>
+<li><a class="reference internal" href="#id2">7.1 合并行</a></li>
+<li><a class="reference internal" href="#id3">7.2 居中行</a></li>
+<li><a class="reference internal" href="#id4">7.3 增加一个行号</a></li>
+<li><a class="reference internal" href="#id5">7.4 转化文件为小写</a></li>
+<li><a class="reference internal" href="#bash">7.5 打印bash环境</a></li>
+<li><a class="reference internal" href="#id6">7.6 反转行内的字符</a></li>
+<li><a class="reference internal" href="#id7">7.7 更多样例</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">My_Study_Sed</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>07 一些样例脚本</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/07-一些样例脚本.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>07 一些样例脚本<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>7.1 合并行<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 test<span class="o">]</span>$ vim lines.txt
+<span class="o">[</span>root@centos74 test<span class="o">]</span>$ cat lines.txt
+hello
+hel
+lo
+hello
+<span class="o">[</span>root@centos74 test<span class="o">]</span>$ sed <span class="s1">&#39;2{N;s/\n//;}&#39;</span> lines.txt
+hello
+hello
+hello
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>7.2 居中行<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/sed -f</span>
+
+<span class="c1"># Put 80 spaces in the buffer</span>
+<span class="m">1</span> <span class="o">{</span>
+x
+s/^$/          /
+s/^.*$/<span class="o">&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;</span>/
+x
+<span class="o">}</span>
+
+<span class="c1"># delete leading and trailing spaces</span>
+y/tab/ /
+s/^ *//
+s/ *$//
+
+<span class="c1"># add a newline and 80 spaces to end of line</span>
+G
+
+<span class="c1"># keep first 81 chars (80 + a newline)</span>
+s/^<span class="se">\(</span>.<span class="se">\{</span><span class="m">81</span><span class="se">\}\)</span>.*$/<span class="se">\1</span>/
+
+<span class="c1"># \2 matches half of the spaces, which are moved to the beginning</span>
+s/^<span class="se">\(</span>.*<span class="se">\)\n\(</span>.*<span class="se">\)\2</span>/<span class="se">\2\1</span>/
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>7.3 增加一个行号<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/sed -f</span>
+
+/<span class="o">[</span>^0-9<span class="o">]</span>/ d
+
+<span class="c1"># replace all trailing 9s by _ (any other character except digits, could</span>
+<span class="c1"># be used)</span>
+:d
+s/9<span class="se">\(</span>_*<span class="se">\)</span>$/_<span class="se">\1</span>/
+td
+
+<span class="c1"># incr last digit only.  The first line adds a most-significant</span>
+<span class="c1"># digit of 1 if we have to add a digit.</span>
+
+s/^<span class="se">\(</span>_*<span class="se">\)</span>$/1<span class="se">\1</span>/<span class="p">;</span> tn
+s/8<span class="se">\(</span>_*<span class="se">\)</span>$/9<span class="se">\1</span>/<span class="p">;</span> tn
+s/7<span class="se">\(</span>_*<span class="se">\)</span>$/8<span class="se">\1</span>/<span class="p">;</span> tn
+s/6<span class="se">\(</span>_*<span class="se">\)</span>$/7<span class="se">\1</span>/<span class="p">;</span> tn
+s/5<span class="se">\(</span>_*<span class="se">\)</span>$/6<span class="se">\1</span>/<span class="p">;</span> tn
+s/4<span class="se">\(</span>_*<span class="se">\)</span>$/5<span class="se">\1</span>/<span class="p">;</span> tn
+s/3<span class="se">\(</span>_*<span class="se">\)</span>$/4<span class="se">\1</span>/<span class="p">;</span> tn
+s/2<span class="se">\(</span>_*<span class="se">\)</span>$/3<span class="se">\1</span>/<span class="p">;</span> tn
+s/1<span class="se">\(</span>_*<span class="se">\)</span>$/2<span class="se">\1</span>/<span class="p">;</span> tn
+s/0<span class="se">\(</span>_*<span class="se">\)</span>$/1<span class="se">\1</span>/<span class="p">;</span> tn
+
+:n
+y/_/0/
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>7.4 转化文件为小写<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>#! /bin/sh
+# rename files to lower/upper case...
+#
+# usage:
+#    move-to-lower *
+#    move-to-upper *
+# or
+#    move-to-lower -R .
+#    move-to-upper -R .
+#
+
+help()
+{
+        cat &lt;&lt; eof
+Usage: $0 [-n] [-r] [-h] files...
+
+-n      do nothing, only see what would be done
+-R      recursive (use find)
+-h      this message
+files   files to remap to lower case
+
+Examples:
+    $0 -n *        (see if everything is ok, then...)
+    $0 *
+
+    $0 -R .
+
+eof
+}
+
+apply_cmd=&#39;sh&#39;
+finder=&#39;echo &quot;$@&quot; | tr &quot; &quot; &quot;\n&quot;&#39;
+files_only=
+
+while :
+do
+    case &quot;$1&quot; in
+        -n) apply_cmd=&#39;cat&#39; ;;
+        -R) finder=&#39;find &quot;$@&quot; -type f&#39;;;
+        -h) help ; exit 1 ;;
+        *) break ;;
+    esac
+    shift
+done
+
+if [ -z &quot;$1&quot; ]; then
+        echo Usage: $0 [-h] [-n] [-r] files...
+        exit 1
+fi
+
+LOWER=&#39;abcdefghijklmnopqrstuvwxyz&#39;
+UPPER=&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
+
+case `basename $0` in
+        *upper*) TO=$UPPER; FROM=$LOWER ;;
+        *)       FROM=$UPPER; TO=$LOWER ;;
+esac
+
+eval $finder | sed -n &#39;
+
+# remove all trailing slashes
+s/\/*$//
+
+# add ./ if there is no path, only a filename
+/\//! s/^/.\//
+
+# save path+filename
+h
+
+# remove path
+s/.*\///
+
+# do conversion only on filename
+y/&#39;$FROM&#39;/&#39;$TO&#39;/
+
+# now line contains original path+file, while
+# hold space contains the new filename
+x
+
+# add converted file name to line, which now contains
+# path/file-name\nconverted-file-name
+G
+
+# check if converted file name is equal to original file name,
+# if it is, do not print anything
+/^.*\/\(.*\)\n\1/b
+
+# escape special characters for the shell
+s/[&quot;$&#39;\\]/\\&amp;/g
+
+# now, transform path/fromfile\n, into
+# mv path/fromfile path/tofile and print it
+s/^\(.*\/\)\(.*\)\n\(.*\)$/mv &quot;\1\2&quot; &quot;\1\3&quot;/p
+
+&#39; | $apply_cmd
+</pre></div>
+</div>
+</div>
+<div class="section" id="bash">
+<h2>7.5 打印bash环境<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nb">set</span> <span class="p">|</span> sed -n <span class="s1">&#39;</span>
+<span class="s1">:x</span>
+
+<span class="s1"># if no occurrence of ‘=()’ print and load next line</span>
+<span class="s1">/=()/! { p; b; }</span>
+<span class="s1">/ () $/! { p; b; }</span>
+
+<span class="s1"># possible start of functions section</span>
+<span class="s1"># save the line in case this is a var like FOO=&quot;() &quot;</span>
+<span class="s1">h</span>
+
+<span class="s1"># if the next line has a brace, we quit because</span>
+<span class="s1"># nothing comes after functions</span>
+<span class="s1">n</span>
+<span class="s1">/^{/ q</span>
+
+<span class="s1"># print the old line</span>
+<span class="s1">x; p</span>
+
+<span class="s1"># work on the new line now</span>
+<span class="s1">x; bx</span>
+<span class="s1">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>7.6 反转行内的字符<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/sed -f</span>
+
+/../! b
+
+<span class="c1"># Reverse a line.  Begin embedding the line between two newlines</span>
+s/^.*$/<span class="se">\</span>
+<span class="p">&amp;</span><span class="se">\</span>
+/
+
+<span class="c1"># Move first character at the end.  The regexp matches until</span>
+<span class="c1"># there are zero or one characters between the markers</span>
+tx
+:x
+s/<span class="se">\(\n</span>.<span class="se">\)\(</span>.*<span class="se">\)\(</span>.<span class="se">\n\)</span>/<span class="se">\3\2\1</span>/
+tx
+
+<span class="c1"># Remove the newline markers</span>
+s/<span class="se">\n</span>//g
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>7.7 更多样例<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.gnu.org/software/sed/manual/sed.html#Examples">更多样例</a></p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

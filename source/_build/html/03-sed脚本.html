@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>03 sed脚本预览 &mdash; My_Study_Sed v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="My_Study_Sed v0.1 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> My_Study_Sed
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">03 sed脚本预览</a><ul>
+<li><a class="reference internal" href="#id1">3.1 sed命令汇总</a></li>
+<li><a class="reference internal" href="#s">3.2 s命令汇总</a></li>
+<li><a class="reference internal" href="#id2">3.3 经常使用的命令</a><ul>
+<li><a class="reference internal" href="#id3">3.3.1 #</a></li>
+<li><a class="reference internal" href="#q-exit-code">3.3.2 q [exit-code]</a></li>
+<li><a class="reference internal" href="#d">3.3.3 d</a></li>
+<li><a class="reference internal" href="#p">3.3.4 p</a></li>
+<li><a class="reference internal" href="#n">3.3.5 n</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">3.4 使用较少的命令</a><ul>
+<li><a class="reference internal" href="#y-source-chars-dest-chars">3.4.1 y/source-chars/dest-chars/</a></li>
+<li><a class="reference internal" href="#a-text">3.4.2 a text</a></li>
+<li><a class="reference internal" href="#i-text">3.4.3 i text</a></li>
+<li><a class="reference internal" href="#c-text">3.4.4 c text</a></li>
+<li><a class="reference internal" href="#id5">3.4.5 =</a></li>
+<li><a class="reference internal" href="#r-filename">3.4.6 r filename</a></li>
+<li><a class="reference internal" href="#w-filename">3.4.7 w filename</a></li>
+<li><a class="reference internal" href="#id6">3.4.8 D</a></li>
+<li><a class="reference internal" href="#id7">3.4.9 N</a></li>
+<li><a class="reference internal" href="#id8">3.4.10 p</a></li>
+<li><a class="reference internal" href="#h">3.4.11 h</a></li>
+<li><a class="reference internal" href="#id9">3.4.12 H</a></li>
+<li><a class="reference internal" href="#g">3.4.13 g</a></li>
+<li><a class="reference internal" href="#id10">3.4.14 G</a></li>
+<li><a class="reference internal" href="#x">3.4.15 x</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">3.5 多个命令一起</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">My_Study_Sed</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>03 sed脚本预览</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/03-sed脚本.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sed">
+<h1>03 sed脚本预览<a class="headerlink" href="#sed" title="Permalink to this headline">¶</a></h1>
+<p>一个SED程序由一个或多个SED命令组成，它们由一个或多个E，f，-表达式，和- file选项传递，或者第一个非选项参数。</p>
+<div class="section" id="id1">
+<h2>3.1 sed命令汇总<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text"><div class="highlight"><pre><span></span>a                                       追加文本
+c\                                      替换行
+d                                       删除模式空间，里面下一次循环
+D                                       模式空间包含新行的时候，删除第一行，循环处理
+e                                       执行命令并发送输出到输出流
+F                                       打印当前文件名字
+g                                       用hold空间去替换模式空间
+G                                       追加新行到模式空间，然后追加内容到hold空间
+h                                       用模式空间去替换hold空间
+H                                       追加行到hold空间，然后追加模式空间到hold空间
+i                                       插入文本
+l                                       明确的格式打印模式空间
+n                                       替换新行到模式空间
+N                                       追加新行到模式空间
+p                                       打印模式空间
+P                                       打印模式空间+换行
+q                                       退出，可以指定退出码
+Q                                       退出，可以指定退出码
+r                                       读取文件
+R                                       当前处理周期结束，读取文件
+s/regexp/replacement/[flags]            替换src模式为replacement的内容
+v                                       版本
+w                                       写入文件
+W                                       写入到文件第一行
+y/src/dst                               转化src模式到dst内容
+z                                       清空模式空间内容
+#                                       一个注释
+{cmd1;cmd2}                             多个命令一起
+=                                       打印当前行号
+</pre></div>
+</div>
+</div>
+<div class="section" id="s">
+<h2>3.2 s命令汇总<a class="headerlink" href="#s" title="Permalink to this headline">¶</a></h2>
+<p>s的命令是替换的。 基本用法是这样的。</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>s/regexp/replacement/flags
+</pre></div>
+</div>
+<p>flags有以下几种</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>g                       全局替换，而不是仅仅第一个
+number                  只匹配指定的个数
+p                       打印出来
+w                       写到文件中
+I                       匹配正则的时候大小写不敏感
+i                       匹配正则的时候大小写不敏感
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>3.3 经常使用的命令<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>3.3.1 #<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>#开头的作为注释</p>
+</div>
+<div class="section" id="q-exit-code">
+<h3>3.3.2 q [exit-code]<a class="headerlink" href="#q-exit-code" title="Permalink to this headline">¶</a></h3>
+<p>退出码，样例：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span>
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+<span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span> <span class="p">|</span> sed 2q
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="o">[</span>root@centos74 ~<span class="o">]</span>$ <span class="nb">echo</span> <span class="nv">$?</span>
+<span class="m">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="d">
+<h3>3.3.3 d<a class="headerlink" href="#d" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span> <span class="p">|</span> sed 2d
+<span class="m">1</span>
+<span class="m">3</span>
+</pre></div>
+</div>
+<p>默认是打印所有行，2d删除了第二行的打印</p>
+</div>
+<div class="section" id="p">
+<h3>3.3.4 p<a class="headerlink" href="#p" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span> <span class="p">|</span> sed -n 2p
+<span class="m">2</span>
+</pre></div>
+</div>
+<p>-n取消了默认的打印，2p纸打印第二行</p>
+</div>
+<div class="section" id="n">
+<h3>3.3.5 n<a class="headerlink" href="#n" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">6</span> <span class="p">|</span> sed <span class="s1">&#39;n;n;s/./x/&#39;</span>
+<span class="m">1</span>
+<span class="m">2</span>
+x
+<span class="m">4</span>
+<span class="m">5</span>
+x
+</pre></div>
+</div>
+<p>这个稍有点复杂， n这个命令的意思上面提过了。 这里在说一次。 如果自动打印被禁用了。就打印模式空间，然后用新的行替换模式空间。</p>
+<p>第一个n;就直接把第一行打印出来了。然后读取了第二行，第二个n;就把第二行打印出来了。然后读取了第三行，接下来是s替换命令，.匹配单个字符，修改为x。所以第三行的3匹配了这个正则，就被修改了。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>3.4 使用较少的命令<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="y-source-chars-dest-chars">
+<h3>3.4.1 y/source-chars/dest-chars/<a class="headerlink" href="#y-source-chars-dest-chars" title="Permalink to this headline">¶</a></h3>
+<p>这个命令和tr差不多的感觉。 就是对应位置替换的。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ <span class="nb">echo</span> hello world <span class="p">|</span> sed <span class="s1">&#39;y/abcdefghij/0123456789/&#39;</span>
+74llo worl3
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-text">
+<h3>3.4.2 a text<a class="headerlink" href="#a-text" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span> <span class="p">|</span> sed <span class="s1">&#39;2a hello&#39;</span>
+<span class="m">1</span>
+<span class="m">2</span>
+hello
+<span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="i-text">
+<h3>3.4.3 i text<a class="headerlink" href="#i-text" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$  seq <span class="m">3</span> <span class="p">|</span> sed <span class="s1">&#39;2i hello&#39;</span>
+<span class="m">1</span>
+hello
+<span class="m">2</span>
+<span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="c-text">
+<h3>3.4.4 c text<a class="headerlink" href="#c-text" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">10</span> <span class="p">|</span> sed <span class="s1">&#39;2,9c hello&#39;</span>
+<span class="m">1</span>
+hello
+<span class="m">10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>3.4.5 =<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ <span class="nb">printf</span> <span class="s1">&#39;%s\n&#39;</span> aaa bbb ccc
+aaa
+bbb
+ccc
+<span class="o">[</span>root@centos74 ~<span class="o">]</span>$ <span class="nb">printf</span> <span class="s2">&quot;%s\n&quot;</span> aaa bbb ccc <span class="p">|</span> <span class="nv">sed</span> <span class="o">=</span>
+<span class="m">1</span>
+aaa
+<span class="m">2</span>
+bbb
+<span class="m">3</span>
+ccc
+</pre></div>
+</div>
+</div>
+<div class="section" id="r-filename">
+<h3>3.4.6 r filename<a class="headerlink" href="#r-filename" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span> <span class="p">|</span> sed <span class="s1">&#39;2r/etc/hostname&#39;</span>
+<span class="m">1</span>
+<span class="m">2</span>
+centos74.magedu.com
+<span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="w-filename">
+<h3>3.4.7 w filename<a class="headerlink" href="#w-filename" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">3</span> <span class="p">|</span>sed <span class="s1">&#39;2wa.txt&#39;</span>
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+<span class="o">[</span>root@centos74 ~<span class="o">]</span>$ cat a.txt
+<span class="m">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>3.4.8 D<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>如果模式空间不包含换行符，如果D的命令发出正常的新周期的开始。否则，删除文本模式空间中的到第一个换行符，用所得的空间格局重新启动循环，没有阅读新的一行输入。</p>
+</div>
+<div class="section" id="id7">
+<h3>3.4.9 N<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>添加一个新行到模式空间，然后在下一行输入到模式空间。如果没有更多的输入，则SED退出而不处理任何命令。</p>
+</div>
+<div class="section" id="id8">
+<h3>3.4.10 p<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>打印出来的部分模式空间到第一个换行符</p>
+</div>
+<div class="section" id="h">
+<h3>3.4.11 h<a class="headerlink" href="#h" title="Permalink to this headline">¶</a></h3>
+<p>用模式空间的内容替换保持空间的内容。</p>
+</div>
+<div class="section" id="id9">
+<h3>3.4.12 H<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>添加一个新行的容纳空间的内容，然后将模式空间的内容，保留空间。</p>
+</div>
+<div class="section" id="g">
+<h3>3.4.13 g<a class="headerlink" href="#g" title="Permalink to this headline">¶</a></h3>
+<p>将模式空间的内容替换为保持空间的内容。</p>
+</div>
+<div class="section" id="id10">
+<h3>3.4.14 G<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>添加一个换行符对模式空间的内容，然后将占据空间的内容到模式空间。</p>
+</div>
+<div class="section" id="x">
+<h3>3.4.15 x<a class="headerlink" href="#x" title="Permalink to this headline">¶</a></h3>
+<p>交换保持和模式空间的内容。</p>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>3.5 多个命令一起<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">6</span> <span class="p">|</span> sed -e 1d -e 3d -e 5d
+<span class="m">2</span>
+<span class="m">4</span>
+<span class="m">6</span>
+<span class="o">[</span>root@centos74 ~<span class="o">]</span>$ seq <span class="m">6</span> <span class="p">|</span> sed <span class="s1">&#39;1d;3d;5d&#39;</span>
+<span class="m">2</span>
+<span class="m">4</span>
+<span class="m">6</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

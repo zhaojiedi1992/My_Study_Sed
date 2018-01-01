@@ -1,0 +1,243 @@
+07 一些样例脚本
+==========================================================
+
+7.1 合并行
+----------------------------------------------------------------
+
+.. code-block:: bash
+
+    [root@centos74 test]$ vim lines.txt
+    [root@centos74 test]$ cat lines.txt 
+    hello
+    hel
+    lo
+    hello
+    [root@centos74 test]$ sed '2{N;s/\n//;}' lines.txt 
+    hello
+    hello
+    hello
+
+7.2 居中行
+------------------------------------------------------------
+
+.. code-block:: bash
+
+    #!/usr/bin/sed -f
+
+    # Put 80 spaces in the buffer
+    1 {
+    x
+    s/^$/          /
+    s/^.*$/&&&&&&&&/
+    x
+    }
+
+    # delete leading and trailing spaces
+    y/tab/ /
+    s/^ *//
+    s/ *$//
+
+    # add a newline and 80 spaces to end of line
+    G
+
+    # keep first 81 chars (80 + a newline)
+    s/^\(.\{81\}\).*$/\1/
+
+    # \2 matches half of the spaces, which are moved to the beginning
+    s/^\(.*\)\n\(.*\)\2/\2\1/
+
+7.3 增加一个行号
+------------------------------------------------------------------
+
+.. code-block:: bash
+
+    #!/usr/bin/sed -f
+
+    /[^0-9]/ d
+
+    # replace all trailing 9s by _ (any other character except digits, could
+    # be used)
+    :d
+    s/9\(_*\)$/_\1/
+    td
+
+    # incr last digit only.  The first line adds a most-significant
+    # digit of 1 if we have to add a digit.
+
+    s/^\(_*\)$/1\1/; tn
+    s/8\(_*\)$/9\1/; tn
+    s/7\(_*\)$/8\1/; tn
+    s/6\(_*\)$/7\1/; tn
+    s/5\(_*\)$/6\1/; tn
+    s/4\(_*\)$/5\1/; tn
+    s/3\(_*\)$/4\1/; tn
+    s/2\(_*\)$/3\1/; tn
+    s/1\(_*\)$/2\1/; tn
+    s/0\(_*\)$/1\1/; tn
+
+    :n
+    y/_/0/
+
+
+7.4 转化文件为小写
+-------------------------------------
+
+.. code-block:: bash
+
+    #! /bin/sh
+    # rename files to lower/upper case...
+    #
+    # usage:
+    #    move-to-lower *
+    #    move-to-upper *
+    # or
+    #    move-to-lower -R .
+    #    move-to-upper -R .
+    #
+
+    help()
+    {
+            cat << eof
+    Usage: $0 [-n] [-r] [-h] files...
+
+    -n      do nothing, only see what would be done
+    -R      recursive (use find)
+    -h      this message
+    files   files to remap to lower case
+
+    Examples:
+        $0 -n *        (see if everything is ok, then...)
+        $0 *
+
+        $0 -R .
+
+    eof
+    }
+
+    apply_cmd='sh'
+    finder='echo "$@" | tr " " "\n"'
+    files_only=
+
+    while :
+    do
+        case "$1" in
+            -n) apply_cmd='cat' ;;
+            -R) finder='find "$@" -type f';;
+            -h) help ; exit 1 ;;
+            *) break ;;
+        esac
+        shift
+    done
+
+    if [ -z "$1" ]; then
+            echo Usage: $0 [-h] [-n] [-r] files...
+            exit 1
+    fi
+
+    LOWER='abcdefghijklmnopqrstuvwxyz'
+    UPPER='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    case `basename $0` in
+            *upper*) TO=$UPPER; FROM=$LOWER ;;
+            *)       FROM=$UPPER; TO=$LOWER ;;
+    esac
+
+    eval $finder | sed -n '
+
+    # remove all trailing slashes
+    s/\/*$//
+
+    # add ./ if there is no path, only a filename
+    /\//! s/^/.\//
+
+    # save path+filename
+    h
+
+    # remove path
+    s/.*\///
+
+    # do conversion only on filename
+    y/'$FROM'/'$TO'/
+
+    # now line contains original path+file, while
+    # hold space contains the new filename
+    x
+
+    # add converted file name to line, which now contains
+    # path/file-name\nconverted-file-name
+    G
+
+    # check if converted file name is equal to original file name,
+    # if it is, do not print anything
+    /^.*\/\(.*\)\n\1/b
+
+    # escape special characters for the shell
+    s/["$'\\]/\\&/g
+
+    # now, transform path/fromfile\n, into
+    # mv path/fromfile path/tofile and print it
+    s/^\(.*\/\)\(.*\)\n\(.*\)$/mv "\1\2" "\1\3"/p
+
+    ' | $apply_cmd
+
+
+7.5 打印bash环境
+------------------------------------------------------------------------------
+
+.. code-block:: bash
+
+    #!/bin/sh
+
+    set | sed -n '
+    :x
+
+    # if no occurrence of ‘=()’ print and load next line
+    /=()/! { p; b; }
+    / () $/! { p; b; }
+
+    # possible start of functions section
+    # save the line in case this is a var like FOO="() "
+    h
+
+    # if the next line has a brace, we quit because
+    # nothing comes after functions
+    n
+    /^{/ q
+
+    # print the old line
+    x; p
+
+    # work on the new line now
+    x; bx
+    '
+
+7.6 反转行内的字符
+--------------------------------------------------------------------------------------
+
+.. code-block:: bash
+
+    #!/usr/bin/sed -f
+
+    /../! b
+
+    # Reverse a line.  Begin embedding the line between two newlines
+    s/^.*$/\
+    &\
+    /
+
+    # Move first character at the end.  The regexp matches until
+    # there are zero or one characters between the markers
+    tx
+    :x
+    s/\(\n.\)\(.*\)\(.\n\)/\3\2\1/
+    tx
+
+    # Remove the newline markers
+    s/\n//g
+
+7.7 更多样例
+-----------------------------------------------------------------
+
+更多样例_
+
+.. _更多样例: http://www.gnu.org/software/sed/manual/sed.html#Examples

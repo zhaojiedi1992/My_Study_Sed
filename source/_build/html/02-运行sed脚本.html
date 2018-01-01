@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>02 运行sed脚本 &mdash; My_Study_Sed v0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="My_Study_Sed v0.1 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> My_Study_Sed
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">02 运行sed脚本</a><ul>
+<li><a class="reference internal" href="#id1">2.1 预览</a></li>
+<li><a class="reference internal" href="#id2">2.2 命令行选项</a></li>
+<li><a class="reference internal" href="#id3">2.3 退出码</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">My_Study_Sed</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>02 运行sed脚本</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/02-运行sed脚本.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sed">
+<h1>02 运行sed脚本<a class="headerlink" href="#sed" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>2.1 预览<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>正常情况下。sed是这样使用的。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sed SCRIPT INPUTFILE...
+</pre></div>
+</div>
+<p>样例1-替换</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">#替换hello文本为world文本</span>
+sed <span class="s1">&#39;s/hello/world/&#39;</span> input.txt &gt; output.txt
+</pre></div>
+</div>
+<p>样例2-修改文件</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">#替换hello文本为world文本,这个会直接修改output.txt的文件的。</span>
+sed -i <span class="s1">&#39;s/hello/world/&#39;</span> input.txt &gt; output.txt
+</pre></div>
+</div>
+<p>样例2-处理指定的行</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">#只打印第45行</span>
+sed -n <span class="s1">&#39;45p&#39;</span> input.txt &gt; output.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>2.2 命令行选项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>全格式的sed命令格式是这样的：</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sed OPTION... <span class="o">[</span>SCRIPT<span class="o">]</span> <span class="o">[</span>INPUTFILE...<span class="o">]</span>
+</pre></div>
+</div>
+<p>命令行参数如下</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--version</span></kbd></td>
+<td>版本信息</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--help</span></kbd></td>
+<td>帮助信息</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-n</span></kbd></td>
+<td>禁用自动打印</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--quiet</span></kbd></td>
+<td>禁用自动打印</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--silent</span></kbd></td>
+<td>禁用自动打印</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-e</span></kbd></td>
+<td>添加命令</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--exoression</span></kbd></td>
+<td>添加命令</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-f</span></kbd></td>
+<td>命令指定在文件里面</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--file</span></kbd></td>
+<td>命令指定在文件里面</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-i</span></kbd></td>
+<td>替换文件</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--in-place</span></kbd></td>
+<td>替换文件</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--posix</span></kbd></td>
+<td>posix sed</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-b</span></kbd></td>
+<td>二进制处理</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--binary</span></kbd></td>
+<td>二进制处理</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--follow-symlinks</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>追踪符号链接文件</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-E</span></kbd></td>
+<td>扩展正则</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-r</span></kbd></td>
+<td>扩展正则</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--regexp-extended</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>扩展正则</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-s</span></kbd></td>
+<td>替换</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--separate</span></kbd></td>
+<td>替换</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h2>2.3 退出码<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>sed的退出码比较少，这里一一列举出来。</p>
+<dl class="docutils">
+<dt>0</dt>
+<dd>成功</dd>
+<dt>1</dt>
+<dd>无效命令</dd>
+<dt>2</dt>
+<dd>一个海阔这多个输入文件不能被打开</dd>
+<dt>3</dt>
+<dd>io错误</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zhaojiedi1992.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
