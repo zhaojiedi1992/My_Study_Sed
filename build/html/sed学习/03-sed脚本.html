@@ -35,7 +35,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="My_Study_Sed v0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="My_Study_Sed v0.1 documentation" href="../index.html"/>
+        <link rel="next" title="04 地址选择行" href="04-地址选择行.html"/>
+        <link rel="prev" title="02 运行sed脚本" href="02-运行sed脚本.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,42 +90,48 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">03 sed脚本预览</a><ul>
-<li><a class="reference internal" href="#id1">3.1 sed命令汇总</a></li>
-<li><a class="reference internal" href="#s">3.2 s命令汇总</a></li>
-<li><a class="reference internal" href="#id2">3.3 经常使用的命令</a><ul>
-<li><a class="reference internal" href="#id3">3.3.1 #</a></li>
-<li><a class="reference internal" href="#q-exit-code">3.3.2 q [exit-code]</a></li>
-<li><a class="reference internal" href="#d">3.3.3 d</a></li>
-<li><a class="reference internal" href="#p">3.3.4 p</a></li>
-<li><a class="reference internal" href="#n">3.3.5 n</a></li>
+              <p class="caption"><span class="caption-text">sed学习</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-简介.html">01 简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-运行sed脚本.html">02 运行sed脚本</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">03 sed脚本预览</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">3.1 sed命令汇总</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#s">3.2 s命令汇总</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">3.3 经常使用的命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.3.1 #</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#q-exit-code">3.3.2 q [exit-code]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d">3.3.3 d</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p">3.3.4 p</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#n">3.3.5 n</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">3.4 使用较少的命令</a><ul>
-<li><a class="reference internal" href="#y-source-chars-dest-chars">3.4.1 y/source-chars/dest-chars/</a></li>
-<li><a class="reference internal" href="#a-text">3.4.2 a text</a></li>
-<li><a class="reference internal" href="#i-text">3.4.3 i text</a></li>
-<li><a class="reference internal" href="#c-text">3.4.4 c text</a></li>
-<li><a class="reference internal" href="#id5">3.4.5 =</a></li>
-<li><a class="reference internal" href="#r-filename">3.4.6 r filename</a></li>
-<li><a class="reference internal" href="#w-filename">3.4.7 w filename</a></li>
-<li><a class="reference internal" href="#id6">3.4.8 D</a></li>
-<li><a class="reference internal" href="#id7">3.4.9 N</a></li>
-<li><a class="reference internal" href="#id8">3.4.10 p</a></li>
-<li><a class="reference internal" href="#h">3.4.11 h</a></li>
-<li><a class="reference internal" href="#id9">3.4.12 H</a></li>
-<li><a class="reference internal" href="#g">3.4.13 g</a></li>
-<li><a class="reference internal" href="#id10">3.4.14 G</a></li>
-<li><a class="reference internal" href="#x">3.4.15 x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3.4 使用较少的命令</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#y-source-chars-dest-chars">3.4.1 y/source-chars/dest-chars/</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-text">3.4.2 a text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-text">3.4.3 i text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-text">3.4.4 c text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.4.5 =</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#r-filename">3.4.6 r filename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#w-filename">3.4.7 w filename</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.4.8 D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.4.9 N</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">3.4.10 p</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h">3.4.11 h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">3.4.12 H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#g">3.4.13 g</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">3.4.14 G</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#x">3.4.15 x</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id11">3.5 多个命令一起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">3.5 多个命令一起</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="04-地址选择行.html">04 地址选择行</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-正则表达式选择文本.html">05 正则表达式选择文本</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-高级sed.html">06 高级sed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-一些样例脚本.html">07 一些样例脚本</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -422,6 +430,15 @@ centos74.magedu.com
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="04-地址选择行.html" class="btn btn-neutral float-right" title="04 地址选择行" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02-运行sed脚本.html" class="btn btn-neutral" title="02 运行sed脚本" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
