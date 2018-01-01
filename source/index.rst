@@ -23,7 +23,7 @@ sed学习
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 2
     :caption: sed学习
 
     sed学习/01-简介
